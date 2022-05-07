@@ -1,4 +1,4 @@
-# RB2RS-Database-Importer
+# RB2RS-Database-Uploader
 This VBS Script download and install the latest "unofficial" list of radio stations for RadioSure.
 
 This list of stations is a conversion of the "Radio-Browser.info" database.

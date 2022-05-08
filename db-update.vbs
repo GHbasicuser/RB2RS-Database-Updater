@@ -32,7 +32,7 @@ Set objFolder = FS.GetFolder(objStartFolder)
 Set colFiles = objFolder.Files
 For Each objFile in colFiles
    if instr(objFile.Name,"stations-") <> 0 AND instr(objFile.Name,".rsd") <> 0 then
-       FS.DeleteFile("Stations\"+ objFile.Name)
+       FS.DeleteFile(objStartFolder + objFile.Name)
    end if
 Next
 Set objFolder = Nothing

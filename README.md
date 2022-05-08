@@ -3,7 +3,7 @@ This VBS Script download and install the latest "unofficial" list of radio stati
 
 This list of stations is a conversion of the "Radio-Browser.info" database.
 
-Place this script in the RadioSure folder, then you can launch it (via Wscript) with a shortcut or the task scheduler :
+Place this script in the RadioSure folder, then you can launch it (via WScript) with a shortcut or the task scheduler :
 
 eg: C:\Windows\System32\WScript.exe C:\Program Files (x86)\RadioSure\db-update.vbs
 

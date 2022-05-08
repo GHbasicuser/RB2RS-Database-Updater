@@ -1,5 +1,5 @@
 '------------------------------------------------------------------------------'
-'db-update.vbs v°1.00 (07/05/2022) par GHbasicuser (aka PhiliWeb)'
+'db-update.vbs v°1.01 (07/05/2022) par GHbasicuser (aka PhiliWeb)'
 'Ce Script VBS permet de télécharger et d'installer la dernière'
 'liste "non officielle" des stations de radios pour RadioSure'
 'Cette liste de stations est une conversion de la base "Radio-Browser.info"'
@@ -27,7 +27,16 @@ Set bStrm = Nothing
 Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")
 If Fichier.Size < 1000000 Then wscript.Quit
 'Suppression de la base installée (et de tout éventuel autre fichier ".rsd")'
-If FS.FileExists("Stations\*.rsd") Then FS.DeleteFile("Stations\*.rsd")
+objStartFolder = "Stations\"
+Set objFolder = FS.GetFolder(objStartFolder)
+Set colFiles = objFolder.Files
+For Each objFile in colFiles
+   if instr(objFile.Name,"stations") <> 0 AND instr(objFile.Name,".rsd") <> 0 then
+       FS.DeleteFile("Stations\"+ objFile.Name)
+   end if
+Next
+Set objFolder = Nothing
+Set colFiles = Nothing
 'Décompression du fichier ZIP contenant la nouvelle base ".rsd" dans le sous-dossier "Stations"'
 DossierZip = Fichier.ParentFolder & "\" & "Latest_RB2RS.zip"
 DossierDezip = Fichier.ParentFolder & "\" 

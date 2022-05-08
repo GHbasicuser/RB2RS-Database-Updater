@@ -4,7 +4,7 @@
 'liste "non officielle" des stations de radios pour RadioSure'
 'Cette liste de stations est une conversion de la base "Radio-Browser.info"'
 '------------------------------------------------------------------------------'
-'Si le fichier 'latest.zip' a moins de 12 Heures on ne va pas plus loin'
+'Si le fichier 'Latest_RB2RS.zip' a moins de 12 Heures on ne va pas plus loin'
 Set FS = createobject("Scripting.FileSystemObject")
 Set Fichier = FS.GetFile("RadioSure.exe")
 If FS.FileExists("Stations\Latest_RB2RS.zip") Then Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")   

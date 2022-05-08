@@ -1,9 +1,9 @@
-'------------------------------------------------------------------------------'
+'------------https://github.com/GHbasicuser/RB2RS-Database-Updater------------'
 'db-update.vbs v°1.01 (07/05/2022) par GHbasicuser (aka PhiliWeb)'
 'Ce Script VBS permet de télécharger et d'installer la dernière'
 'liste "non officielle" des stations de radios pour RadioSure'
 'Cette liste de stations est une conversion de la base "Radio-Browser.info"'
-'------------------------------------------------------------------------------'
+'-----------------------------------------------------------------------------'
 'Si le fichier 'Latest_RB2RS.zip' a moins de 12 Heures on ne va pas plus loin'
 Set FS = createobject("Scripting.FileSystemObject")
 Set Fichier = FS.GetFile("RadioSure.exe")

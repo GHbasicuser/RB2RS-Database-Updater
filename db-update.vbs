@@ -4,7 +4,7 @@
 'liste "non officielle" des stations de radios pour RadioSure'
 'Cette liste de stations est une conversion de la base "Radio-Browser.info"'
 '-----------------------------------------------------------------------------'
-'Si le fichier 'Latest_RB2RS.zip' a moins de 12 Heures on ne va pas plus loin'
+'Est-ce que le script tourne dans le dossier de RadioSure ?'
 Set FS = createobject("Scripting.FileSystemObject")
 If Not FS.FileExists("RadioSure.exe") Then 
        Dim oError
@@ -13,6 +13,7 @@ If Not FS.FileExists("RadioSure.exe") Then
        Set oError=Nothing
        wscript.Quit
 End If
+'Si le fichier 'Latest_RB2RS.zip' a moins de 12 Heures on ne va pas plus loin'
 If FS.FileExists("Stations\Latest_RB2RS.zip") Then
 Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")   
     If DateDiff("h", Fichier.DateLastModified, Now) < 12 Then wscript.Quit 
@@ -68,7 +69,7 @@ nNode.text = Year(Now) & "/" & Month(Now) & "/" & Day(Now) & "/" & Hour(Now) & "
 strResult = xmldoc.save("RadioSure.xml")
 Set xmlDoc = Nothing
 Set nNode = Nothing
-'Affiche un message pour informer du succes de la mise à jour pendant 5 secondes'
+'Affiche un message pour informer du succès de la mise à jour pendant 5 secondes'
 Dim oSucces
 Set oSucces = CreateObject("WScript.Shell")
 oSucces.Popup "RadioSure - The Radio Stations database has been updated.", 5

@@ -10,7 +10,7 @@ Place this script in the RadioSure folder, then you can launch it with a ".bat, 
 (Don't forget : In the "start in" (location) section, you must specify the RadioSure folder.)
 
 _______________________________
-db-update.vbs v°1.04 : 
+db-update.vbs v°1.05 : 
 * displays a message for 5 second if the update was successfull.
 * doesn't try to download anything if an update was done less than 12 hours ago. (to preserve the server)
 * cancels the update if the zip file is too small.

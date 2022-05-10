@@ -36,7 +36,7 @@ Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")
 Set Fichier = Nothing
 End If    
 'Téléchargement de la dernière base "RB2RS" sur le serveur perso de francois-neosurf'
-On Error Resume Next  ' Start Error Handling
+On Error Resume Next
 dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP")
 xHttp.Open "GET", BASE_SOURCE, False
 xHttp.Send
@@ -57,7 +57,7 @@ Else
      If RadioSure = 1 Then Start_RadioSure()
      wscript.Quit
 End If
-On Error Goto 0  ' End Error Handling    
+On Error Goto 0
 'On ne va pas plus loin si le fichier ZIP est trop petit pour réellement contenir une base valide'
 Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")
 If Fichier.Size < 1000000 Then 

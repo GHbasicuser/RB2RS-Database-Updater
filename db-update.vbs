@@ -81,8 +81,7 @@ Set colFiles = Nothing
 'Décompression du fichier ZIP contenant la nouvelle base ".rsd" dans le sous-dossier "Stations"'
 DossierZip = Fichier.ParentFolder & "\" & "Latest_RB2RS.zip"
 DossierDezip = Fichier.ParentFolder & "\" 
-Set osa = createobject("Shell.Application" )
-nbFic = osa.Namespace(DossierZip).Items.Count 
+Set osa = createobject("Shell.Application")
 osa.Namespace(DossierDezip).CopyHere osa.Namespace(DossierZip).Items, 20
 Set FS = Nothing
 Set Fichier = Nothing

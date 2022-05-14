@@ -13,9 +13,9 @@ Set oMessageBox = CreateObject("WScript.Shell")
 'Est-ce que le script tourne dans le dossier de RadioSure ?'
 Set FS = createobject("Scripting.FileSystemObject")
 If Not FS.FileExists("RadioSure.exe") Then 
-       oMessageBox.Popup "Problem: This VBS script doesn't seem to be running in the RadioSure folder.", 120, "RB2RS-Database-Updater (db-update.vbs)", 0 + 48
-       Set oMessageBox = Nothing
-       wscript.Quit
+     oMessageBox.Popup "Problem: This VBScript doesn't seem to be running in the RadioSure folder.", 120, "RB2RS-Database-Updater (db-update.vbs)", 0 + 48
+     Set oMessageBox = Nothing
+     wscript.Quit
 End If
 'Fonction pour lancer RadioSure à la fin du script'
 function Start_RadioSure()
@@ -25,7 +25,7 @@ Set WshShell = Nothing
 End Function
 'Si le fichier 'Latest_RB2RS.zip' a moins de 12 Heures on ne va pas plus loin'
 If FS.FileExists("Stations\Latest_RB2RS.zip") Then 
-Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")   
+     Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")   
     If DateDiff("h", Fichier.DateLastModified, Now) < Minimum_waiting_time_to_redownload Then 
        If RadioSure = 1 Then Start_RadioSure() 
        wscript.Quit
@@ -34,7 +34,7 @@ Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")
        oMessageBox.Popup "RadioSure - The last successful update is more than 30 days old.", 120, "RB2RS-Database-Updater (db-update.vbs)", 0 + 64
        Set oMessageBox = Nothing
     End If
-Set Fichier = Nothing
+     Set Fichier = Nothing
 End If    
 'Téléchargement de la dernière base "RB2RS"'
 On Error Resume Next 
@@ -42,15 +42,15 @@ dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP")
 xHttp.Open "GET", BASE_SOURCE, False
 xHttp.Send
 If xHttp.Status = 200 Then 
-   dim bStrm: Set bStrm = createobject("Adodb.Stream")  
-   with bStrm
-    .type = 1
-    .open
-    .write xHttp.responseBody
-    .savetofile "Stations\Latest_RB2RS.zip", 2
-    end with
-    Set bStrm = Nothing
-    Set xHttp = Nothing
+     dim bStrm: Set bStrm = createobject("Adodb.Stream")  
+     with bStrm
+     .type = 1
+     .open
+     .write xHttp.responseBody
+     .savetofile "Stations\Latest_RB2RS.zip", 2
+     end with
+     Set bStrm = Nothing
+     Set xHttp = Nothing
 Else 
      Set xHttp = Nothing
      oMessageBox.Popup "RadioSure - Didn't get a response from Stations list Update server.", 10, "RB2RS-Database-Updater (db-update.vbs)"
@@ -61,12 +61,12 @@ End If
 On Error Goto 0      
 'On ne va pas plus loin si le fichier ZIP est trop petit pour réellement contenir une base valide'
 Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")
-If Fichier.Size < 1000000 Then 
-   Set Fichier = Nothing
-   oMessageBox.Popup "RadioSure - The downloaded ZIP file seems too small. Update cancelled.", 10, "RB2RS-Database-Updater (db-update.vbs)", 0 + 64
-   Set oMessageBox = Nothing
-   If RadioSure = 1 Then Start_RadioSure()
-   wscript.Quit
+If Fichier.Size < 800000 Then 
+     Set Fichier = Nothing
+     oMessageBox.Popup "RadioSure - The downloaded ZIP file seems too small. Update cancelled.", 10, "RB2RS-Database-Updater (db-update.vbs)", 0 + 64
+     Set oMessageBox = Nothing
+     If RadioSure = 1 Then Start_RadioSure()
+     wscript.Quit
 End If
 'Suppression de la base installée (et de tout éventuel autre fichier ".rsd")'
 objStartFolder = "Stations\"

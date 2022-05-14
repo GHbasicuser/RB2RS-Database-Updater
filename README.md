@@ -1,5 +1,5 @@
 # RB2RS-Database-Updater
-This VBS Script download and install the latest "unofficial" list of radio stations for RadioSure.
+This VBScript download and install the latest "unofficial" list of radio stations for RadioSure.
 
 This list of stations is a conversion (made by Francois-neosurf) of the "Radio-Browser.info" database.
 
@@ -27,6 +27,7 @@ _______________________________
 ```
 Target = C:\Windows\System32\WScript.exe db-update.vbs
 Start In (location) = the RadioSure folder (eg: C:\Program Files (x86)\RadioSure)
+(For better rendering, you can replace the icon with the one inside the RadioSure.exe file.)
 ```
 * Example of use in batch file (in RadioSure folder) :
 ```

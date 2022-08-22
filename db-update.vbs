@@ -1,19 +1,28 @@
 '------------https://github.com/GHbasicuser/RB2RS-Database-Updater------------'
-'db-update.vbs v°1.06 (10/05/2022) par GHbasicuser (aka PhiliWeb)'
+'db-update.vbs v°1.07 (21/08/2022) par GHbasicuser (aka PhiliWeb)'
 'Ce Script VBS permet de télécharger et d'installer la dernière'
 'liste "non officielle" des stations de radios pour RadioSure'
 'Cette liste de stations est une conversion de la base "Radio-Browser.info"'
 '-----------------------------------------------------------------------------'
-BASE_SOURCE = "http://82.66.77.189:8080/latest.zip"
+BASE_SOURCE = "http://rb2rs.freemyip.com/latest.zip"
 RadioSure = 0 'Put 1 to start RadioSure at the end of the script, otherwise 0'
 Minimum_waiting_time_to_redownload = 12 'duration in hours'
 '-----------------------------------------------------------------------------'
+'***** Pour une utilisation avec le planificateur des tâches via schtasks, ou si Wscript n'utilise pas le bon emplacement *****'
+VBSName = Wscript.ScriptName
+ActualPath = WScript.ScriptFullName
+ActualPath = Replace(ActualPath, "\" & VBSName, "")
+Set objShell = CreateObject("Wscript.Shell")
+objShell.CurrentDirectory = Actualpath
+Set Actualpath = Nothing
+Set objShell = Nothing
+'*****'
 Dim oMessageBox
 Set oMessageBox = CreateObject("WScript.Shell")
 'Est-ce que le script tourne dans le dossier de RadioSure ?'
 Set FS = createobject("Scripting.FileSystemObject")
 If Not FS.FileExists("RadioSure.exe") Then 
-     oMessageBox.Popup "Problem: This VBScript doesn't seem to be running in the RadioSure folder.", 120, "RB2RS-Database-Updater (db-update.vbs)", 0 + 48
+     oMessageBox.Popup "Problem: This VBScript doesn't seem to be running in the RadioSure folder.", 120, "RB2RS-Database-Updater ("& VBSName &")", 0 + 48
      Set oMessageBox = Nothing
      wscript.Quit
 End If
@@ -31,7 +40,7 @@ If FS.FileExists("Stations\Latest_RB2RS.zip") Then
        wscript.Quit
     End  If 
     If DateDiff("d", Fichier.DateLastModified, Now) > 30 Then 
-       oMessageBox.Popup "RadioSure - The last successful update is more than 30 days old.", 120, "RB2RS-Database-Updater (db-update.vbs)", 0 + 64
+       oMessageBox.Popup "RadioSure - The last successful update is more than 30 days old.", 120, "RB2RS-Database-Updater ("& VBSName &")", 0 + 64
        Set oMessageBox = Nothing
     End If
      Set Fichier = Nothing
@@ -53,7 +62,7 @@ If xHttp.Status = 200 Then
      Set xHttp = Nothing
 Else 
      Set xHttp = Nothing
-     oMessageBox.Popup "RadioSure - Didn't get a response from Stations list Update server.", 10, "RB2RS-Database-Updater (db-update.vbs)"
+     oMessageBox.Popup "RadioSure - Didn't get a response from Stations list Update server.", 10, "RB2RS-Database-Updater ("& VBSName &")"
      Set oMessageBox = Nothing
      If RadioSure = 1 Then Start_RadioSure()
      wscript.Quit
@@ -63,7 +72,7 @@ On Error Goto 0
 Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")
 If Fichier.Size < 800000 Then 
      Set Fichier = Nothing
-     oMessageBox.Popup "RadioSure - The downloaded ZIP file seems too small. Update cancelled.", 10, "RB2RS-Database-Updater (db-update.vbs)", 0 + 64
+     oMessageBox.Popup "RadioSure - The downloaded ZIP file seems too small. Update cancelled.", 10, "RB2RS-Database-Updater ("& VBSName &")", 0 + 64
      Set oMessageBox = Nothing
      If RadioSure = 1 Then Start_RadioSure()
      wscript.Quit
@@ -96,6 +105,7 @@ strResult = xmldoc.save("RadioSure.xml")
 Set xmlDoc = Nothing
 Set nNode = Nothing
 'Affiche un message pour informer du succès de la mise à jour pendant 5 secondes'
-oMessageBox.Popup "RadioSure - The Radio Stations database has been updated.", 5, "RB2RS-Database-Updater (db-update.vbs)" 
+oMessageBox.Popup "RadioSure - The Radio Stations database has been updated.", 5, "RB2RS-Database-Updater ("& VBSName &")" 
 Set oMessageBox = Nothing
+Set VBSName = Nothing
 If RadioSure = 1 Then Start_RadioSure()

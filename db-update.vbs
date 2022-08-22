@@ -1,6 +1,6 @@
 '------------https://github.com/GHbasicuser/RB2RS-Database-Updater------------'
 'db-update.vbs v°1.07 (21/08/2022) par GHbasicuser (aka PhiliWeb)'
-'Ce Script VBS permet de télécharger et d'installer la dernière'
+'Ce VBScript permet de télécharger et d'installer la dernière'
 'liste "non officielle" des stations de radios pour RadioSure'
 'Cette liste de stations est une conversion de la base "Radio-Browser.info"'
 '-----------------------------------------------------------------------------'
@@ -8,7 +8,7 @@ BASE_SOURCE = "http://rb2rs.freemyip.com/latest.zip"
 RadioSure = 0 'Put 1 to start RadioSure at the end of the script, otherwise 0'
 Minimum_waiting_time_to_redownload = 12 'duration in hours'
 '-----------------------------------------------------------------------------'
-'Pour une utilisation avec schtasks ou si WScript n'utilise pas le bon emplacement'
+'Pour une utilisation avec schtasks,...'
 VBSName = Wscript.ScriptName
 ActualPath = WScript.ScriptFullName
 ActualPath = Replace(ActualPath, "\" & VBSName, "")

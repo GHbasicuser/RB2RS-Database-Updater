@@ -8,7 +8,7 @@ BASE_SOURCE = "http://rb2rs.freemyip.com/latest.zip"
 RadioSure = 0 'Put 1 to start RadioSure at the end of the script, otherwise 0'
 Minimum_waiting_time_to_redownload = 12 'duration in hours'
 '-----------------------------------------------------------------------------'
-'***** Pour une utilisation avec le planificateur des tâches via schtasks, ou si Wscript n'utilise pas le bon emplacement *****'
+'Pour une utilisation avec schtasks ou si WScript n'utilise pas le bon emplacement'
 VBSName = Wscript.ScriptName
 ActualPath = WScript.ScriptFullName
 ActualPath = Replace(ActualPath, "\" & VBSName, "")
@@ -16,7 +16,6 @@ Set objShell = CreateObject("Wscript.Shell")
 objShell.CurrentDirectory = ActualPath
 Set ActualPath = Nothing
 Set objShell = Nothing
-'*****'
 Dim oMessageBox
 Set oMessageBox = CreateObject("WScript.Shell")
 'Est-ce que le script tourne dans le dossier de RadioSure ?'

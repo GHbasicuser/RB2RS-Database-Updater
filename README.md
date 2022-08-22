@@ -24,14 +24,14 @@ _______________________________
 _______________________________
 * Example of creating a desktop shortcut : 
 ```
-- Extract the .zip archive into the RadioSure folder. (or Place the VBS file in the RadioSure folder.)
+- Extract the .zip archive into the RadioSure folder.
 - Right-click on “db-update.vbs” file, then choose "Send to desktop (create shortcut)".
 
-On the desktop :
+On the desktop, right-click on the shortcut, then choose "Properties" :
+- In the target area put: wscript.exe db-update.vbs
+- For better rendering, you can click on "Change Icon" and use the one inside the RadioSure.exe file.
 
-- Right-click on the shortcut, then choose "Properties", in the target area put: wscript.exe db-update.vbs
-- For better rendering, you can replace the icon with the one inside the RadioSure.exe file.
-- If you want to rename the shortcut, right-click on the shortcut, then choose "Rename".
+If you want to rename the shortcut, right-click on the shortcut, then choose "Rename".
 ```
 * Example of use in batch file (in RadioSure folder) :
 ```

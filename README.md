@@ -1,13 +1,12 @@
 # RB2RS-Database-Updater
 This VBScript download and install the latest "unofficial" list of radio stations for RadioSure.
 
-This list of stations is a conversion (made by Francois-neosurf) of the "Radio-Browser.info" database.
+This list of stations is a conversion of the "Radio-Browser.info" database. (more than 30000 stations ! :-))
 
 Place this script in the RadioSure folder, then you can launch it with a ".bat", a shortcut or the task scheduler :
 
-* eg: C:\Windows\System32\WScript.exe db-update.vbs
-
-(Don't forget : In the "start in" (location) section, you must specify the RadioSure folder.)
+* eg: wscript.exe db-update.vbs
+* Start In (location) = the RadioSure folder (eg: C:\Program Files (x86)\RadioSure)
 
 _______________________________
 db-update.vbs : 
@@ -16,18 +15,23 @@ db-update.vbs :
 * cancels the update if the zip file is too small.
 * modifies the "Radiosure.xml" file to inform the software that the last station search has just been done. 
 * displays some informational messages (ex : if the last successful RB2RS update is more than 30 days old).
-* download source can be modified in file header. (Francois-neosurf's server = http://82.66.77.189:8080/)
+* download source can be modified in file header. (e.g. : http://82.66.77.189/ or http://rb2rs.freemyip.com/)
 * can launch RadioSure by setting RadioSure = 1 in file header (db-update.vbs).
 _______________________________
 
 ![](https://www.zupimages.net/up/22/19/5djq.png)
 
 _______________________________
-* Example of creating a desktop shortcut : https://zupimages.net/up/22/18/lfkh.jpg
+* Example of creating a desktop shortcut : 
 ```
-Target = C:\Windows\System32\WScript.exe db-update.vbs
-Start In (location) = the RadioSure folder (eg: C:\Program Files (x86)\RadioSure)
-(For better rendering, you can replace the icon with the one inside the RadioSure.exe file.)
+- Extract the .zip archive into the RadioSure folder. (or Place the VBS file in the RadioSure folder.)
+- Right-click on “db-update.vbs” file, then choose "Send to desktop (create shortcut)".
+
+On the desktop :
+
+- Right-click on the shortcut, then choose "Properties", in the target area put: wscript.exe db-update.vbs
+- For better rendering, you can replace the icon with the one inside the RadioSure.exe file.
+- If you want to rename the shortcut, right-click on the shortcut, then choose "Rename".
 ```
 * Example of use in batch file (in RadioSure folder) :
 ```

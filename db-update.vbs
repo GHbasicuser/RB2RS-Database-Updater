@@ -13,8 +13,8 @@ VBSName = Wscript.ScriptName
 ActualPath = WScript.ScriptFullName
 ActualPath = Replace(ActualPath, "\" & VBSName, "")
 Set objShell = CreateObject("Wscript.Shell")
-objShell.CurrentDirectory = Actualpath
-Set Actualpath = Nothing
+objShell.CurrentDirectory = ActualPath
+Set ActualPath = Nothing
 Set objShell = Nothing
 '*****'
 Dim oMessageBox

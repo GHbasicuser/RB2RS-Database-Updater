@@ -1,8 +1,7 @@
 '------------https://github.com/GHbasicuser/RB2RS-Database-Updater------------'
-'db-update.vbs v°1.07 (21/08/2022) par GHbasicuser (aka PhiliWeb)'
-'Ce VBScript permet de télécharger et d'installer la dernière'
-'liste "non officielle" des stations de radios pour RadioSure'
-'Cette liste de stations est une conversion de la base "Radio-Browser.info"'
+'db-update.vbs v°1.08 (2023-04-08) by GHbasicuser (aka PhiliWeb)'
+'This VBScript downloads and installs the latest "Radio-Browser" station list' 
+'for RadioSure. (More information on https://www.radiosure.fr)'
 '-----------------------------------------------------------------------------'
 BASE_SOURCE = "http://rb2rs.freemyip.com/latest.zip"
 RadioSure = 0 'Put 1 to start RadioSure at the end of the script, otherwise 0'
@@ -33,24 +32,23 @@ Set WshShell = Nothing
 End Function
 'Si le fichier 'Latest_RB2RS.zip' a moins de 12 Heures on ne va pas plus loin'
 If FS.FileExists("Stations\Latest_RB2RS.zip") Then 
-     Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")   
+     Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")
     If DateDiff("h", Fichier.DateLastModified, Now) < Minimum_waiting_time_to_redownload Then 
        If RadioSure = 1 Then Start_RadioSure() 
        wscript.Quit
     End  If 
     If DateDiff("d", Fichier.DateLastModified, Now) > 30 Then 
        oMessageBox.Popup "RadioSure - The last successful update is more than 30 days old.", 120, "RB2RS-Database-Updater ("& VBSName &")", 0 + 64
-       Set oMessageBox = Nothing
     End If
      Set Fichier = Nothing
-End If    
+End If
 'Téléchargement de la dernière base "RB2RS"'
 On Error Resume Next 
 dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP")
 xHttp.Open "GET", BASE_SOURCE, False
 xHttp.Send
 If xHttp.Status = 200 Then 
-     dim bStrm: Set bStrm = createobject("Adodb.Stream")  
+     dim bStrm: Set bStrm = createobject("Adodb.Stream")
      with bStrm
      .type = 1
      .open
@@ -66,7 +64,7 @@ Else
      If RadioSure = 1 Then Start_RadioSure()
      wscript.Quit
 End If
-On Error Goto 0      
+On Error Goto 0
 'On ne va pas plus loin si le fichier ZIP est trop petit pour réellement contenir une base valide'
 Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")
 If Fichier.Size < 800000 Then 

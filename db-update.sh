@@ -1,6 +1,6 @@
 #!/bin/bash
 # Original author: GHbasicuser
-# Convert to bash script by me
+# Convert to bash script by directentis1 (https://github.com/directentis1)
 
 # Configuration
 BASE_SOURCE="http://rb2rs.freemyip.com/latest.zip"

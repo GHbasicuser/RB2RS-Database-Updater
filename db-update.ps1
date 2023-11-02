@@ -77,12 +77,15 @@ remove-item Stations\* -include stations*.rsd
 Expand-Archive -Path "Stations/Latest_RB2RS.zip" -Force -DestinationPath "Stations"
 
 # Update the RadioSure.xml file with the current date and time
-if ((Test-Path -Path "RadioSure.xml"))
+if (Test-Path -Path "RadioSure.xml")
 {
 	$Current_DateTime = Get-Date -Format "yyyy/MM/dd/HH/mm"
 	$xml = [xml](Get-Content -Path "RadioSure.xml")
-	$xml.XMLConfigSettings.General.LastStationsUpdateCheck = $Current_DateTime.toString()
-	$xml.Save("RadioSure.xml")
+	$LastStationsUpdateCheckNode = $xml.XMLConfigSettings.General.LastStationsUpdateCheck
+	if ($LastStationsUpdateCheckNode -ne $null) {
+		$xml.XMLConfigSettings.General.LastStationsUpdateCheck = $Current_DateTime.toString()
+		$xml.Save("RadioSure.xml")
+	}
 }
 
 # Show success message

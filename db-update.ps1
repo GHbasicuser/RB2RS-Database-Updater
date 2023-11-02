@@ -1,5 +1,5 @@
 ############# https://github.com/GHbasicuser/RB2RS-Database-Updater ############
-#        db-update.ps1 v°1.00 (2023-10-11) by GHbasicuser (aka PhiliWeb)       #
+#        db-update.ps1 v°1.01 (2023-11-01) by GHbasicuser (aka PhiliWeb)       #
 #   This script (in PowerShell for Windows) downloads and installs the latest  #
 #   "Radio-Browser" station list for RadioSure.                                #
 #               (More information on https://www.radiosure.fr)                 #
@@ -77,10 +77,13 @@ remove-item Stations\* -include stations*.rsd
 Expand-Archive -Path "Stations/Latest_RB2RS.zip" -Force -DestinationPath "Stations"
 
 # Update the RadioSure.xml file with the current date and time
-$Current_DateTime = Get-Date -Format "yyyy/MM/dd/HH/mm"
-$xml = [xml](Get-Content -Path "RadioSure.xml")
-$xml.XMLConfigSettings.General.LastStationsUpdateCheck = $Current_DateTime.toString()
-$xml.Save("RadioSure.xml")
+if ((Test-Path -Path "RadioSure.xml"))
+{
+	$Current_DateTime = Get-Date -Format "yyyy/MM/dd/HH/mm"
+	$xml = [xml](Get-Content -Path "RadioSure.xml")
+	$xml.XMLConfigSettings.General.LastStationsUpdateCheck = $Current_DateTime.toString()
+	$xml.Save("RadioSure.xml")
+}
 
 # Show success message
 write-host "The Radio Stations database has been updated." -BackgroundColor Black -ForegroundColor Green

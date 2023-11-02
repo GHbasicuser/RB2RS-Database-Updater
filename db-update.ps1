@@ -18,7 +18,7 @@ Start-Process -FilePath "radiosure.exe"
 }
 
 # Check if script is running in the appropriate directory
-if (!(Test-Path -Path "radiosure.exe")) 
+if (!(Test-Path -Path "radiosure.exe"))
 {
 	write-host "Problem: This script doesn't seem to be running in the RadioSure folder." -BackgroundColor Black -ForegroundColor Red
 	Start-Sleep -Seconds 120
@@ -39,7 +39,7 @@ if (Test-Path $sourcefile) {
 	if (((get-date) - $lastWrite) -gt $timespan) {
 		write-host "The last successful update is more than 30 days old." -BackgroundColor Black -ForegroundColor Yellow
 		Write-host "The RB2RS server address used by this script may no longer be valid." -BackgroundColor Black -ForegroundColor Yellow
-		Write-host "If the next download attempt fails, please consult https://www.radiosure.fr" -BackgroundColor Black -ForegroundColor Yellow
+		Write-host "If the next download attempt fails, please consult : https://www.radiosure.fr" -BackgroundColor Black -ForegroundColor Yellow
 	}
 }
 
@@ -82,10 +82,13 @@ if (Test-Path -Path "RadioSure.xml")
 	$Current_DateTime = Get-Date -Format "yyyy/MM/dd/HH/mm"
 	$xml = [xml](Get-Content -Path "RadioSure.xml")
 	$LastStationsUpdateCheckNode = $xml.XMLConfigSettings.General.LastStationsUpdateCheck
-	if ($LastStationsUpdateCheckNode -ne $null) {
-		$xml.XMLConfigSettings.General.LastStationsUpdateCheck = $Current_DateTime.toString()
-		$xml.Save("RadioSure.xml")
+	if ($LastStationsUpdateCheckNode -eq $null) {
+		$GeneralNode = $xml.SelectSingleNode("//General")
+		$LastStationsUpdateCheckNode = $xml.CreateElement("LastStationsUpdateCheck")
+		$GeneralNode.AppendChild($LastStationsUpdateCheckNode)
 	}
+	$xml.XMLConfigSettings.General.LastStationsUpdateCheck = $Current_DateTime.toString()
+	$xml.Save("RadioSure.xml")
 }
 
 # Show success message

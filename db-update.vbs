@@ -32,7 +32,7 @@ Set WshShell = Nothing
 End Function
 'If the "Latest_RB2RS.zip" file is less than 12 hours old, exit'
 If FS.FileExists("Stations\Latest_RB2RS.zip") Then 
-     Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")
+    Set Fichier = FS.GetFile("Stations\Latest_RB2RS.zip")
     If DateDiff("h", Fichier.DateLastModified, Now) < Minimum_waiting_time_to_redownload Then 
        If RadioSure = 1 Then Start_RadioSure() 
        wscript.Quit
@@ -40,10 +40,10 @@ If FS.FileExists("Stations\Latest_RB2RS.zip") Then
     If DateDiff("d", Fichier.DateLastModified, Now) > 30 Then 
        oMessageBox.Popup "RadioSure" & vbCrLf & vbCrLf & _
        "- The last successful update is more than 30 days old." & vbCrLf & vbCrLf & _
-       "- The RB2RS server address used by this script may no longer be valid. " &_
+       "- The RB2RS server address used by this script may no longer be valid. " & _
        "If the next download attempt fails, please consult : https://www.radiosure.fr", 120, "RB2RS-Database-Updater ("& VBSName &")", 0 + 64
     End If
-     Set Fichier = Nothing
+    Set Fichier = Nothing
 End If
 'Download the latest "RB2RS" database'
 On Error Resume Next 
@@ -97,15 +97,19 @@ Set Fichier = Nothing
 Set osa = Nothing
 'Update the RadioSure.xml file with the current date and time'
 If FS.FileExists("RadioSure.xml") Then
-Set xmlDoc = CreateObject("Microsoft.XMLDOM")
-xmlDoc.load "RadioSure.xml"
-Set nNode = xmlDoc.selectsinglenode ("//General/LastStationsUpdateCheck")
-  If Not nNode Is Nothing Then
-  nNode.text = Year(Now) & "/" & Month(Now) & "/" & Day(Now) & "/" & Hour(Now) & "/" & Minute(Now)
-  strResult = xmldoc.save("RadioSure.xml")
-  End If
-Set xmlDoc = Nothing
-Set nNode = Nothing
+    Set xmlDoc = CreateObject("Microsoft.XMLDOM")
+    xmlDoc.load "RadioSure.xml"
+    Set nNode = xmlDoc.selectsinglenode ("//General/LastStationsUpdateCheck")
+    If nNode Is Nothing Then
+      Set generalNode = xmlDoc.selectsinglenode("//General")
+      Set nNode = xmlDoc.createNode(1,"LastStationsUpdateCheck","")
+      generalNode.appendChild nNode
+    End if
+    nNode.text = Year(Now) & "/" & Month(Now) & "/" & Day(Now) & "/" & Hour(Now) & "/" & Minute(Now)
+    xmldoc.save("RadioSure.xml")
+    Set xmlDoc = Nothing
+    Set nNode = Nothing
+    Set generalNode = Nothing
 End If
 Set FS = Nothing
 'Show success message'

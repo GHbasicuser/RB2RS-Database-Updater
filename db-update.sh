@@ -1,13 +1,14 @@
 #!/bin/bash
 # Original author: GHbasicuser
 # Convert to bash script by directentis1 (https://github.com/directentis1)
+# Version 1.00 (2023-11-01)
 
 # Configuration
 BASE_SOURCE="http://rb2rs.freemyip.com/latest.zip"
 RadioSure=0  # Put 1 to start RadioSure at the end of the script, otherwise 0
 Minimum_waiting_time_to_redownload=12  # duration in hours
 
-# Functions
+# Function start_radiosure
 start_radiosure() {
     wine "./RadioSure.exe"
     echo "Starting RadioSure..."
@@ -61,8 +62,10 @@ find Stations -name "stations-*.rsd" -delete
 unzip "Stations/Latest_RB2RS.zip" -d "Stations"
 
 # Update the RadioSure.xml file with the current date and time
+if [ -f "RadioSure.xml" ]; then
 current_datetime=$(date +"%Y/%m/%d/%H/%M")
 sed -i "s/<LastStationsUpdateCheck>.*<\/LastStationsUpdateCheck>/<LastStationsUpdateCheck>$current_datetime<\/LastStationsUpdateCheck>/" "RadioSure.xml"
+fi
 
 # Show success message
 echo "RadioSure - The Radio Stations database has been updated."
